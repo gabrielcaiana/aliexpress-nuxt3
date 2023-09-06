@@ -6,10 +6,30 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prepare": "husky install"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.7.1"
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "husky": "^8.0.3",
+    "nuxt": "^3.7.1",
+    "prisma": "^5.2.0"
+  },
+  "dependencies": {
+    "@nuxtjs/supabase": "^1.1.0",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
+    "@pinia/nuxt": "^0.4.11",
+    "@prisma/client": "^5.2.0",
+    "@stripe/stripe-js": "^2.1.2",
+    "nuxt-icon": "^0.5.0",
+    "nuxt-lodash": "^2.5.0",
+    "pinia": "^2.1.6",
+    "stripe": "^13.4.0"
   }
 }

@@ -1,13 +1,13 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
 interface State {
-  isMenuOverlay: boolean
-  isLoading: boolean
-  cart: unknown[]
-  checkout: unknown[]
+  isMenuOverlay: boolean;
+  isLoading: boolean;
+  cart: unknown[];
+  checkout: unknown[];
 }
 
-export const useUserStore = defineStore('user', {
+export const useUserStore = defineStore("user", {
   state: (): State => ({
     isMenuOverlay: false,
     isLoading: false,
@@ -15,4 +15,4 @@ export const useUserStore = defineStore('user', {
     checkout: [],
   }),
   persist: true,
-})
+});

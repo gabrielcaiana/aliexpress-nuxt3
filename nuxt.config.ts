@@ -20,6 +20,7 @@ export default defineNuxtConfig({
       script: [{ src: "https://js.stripe.com/v3/", defer: true }],
       link: [{ rel: "icon", type: "image/x-svg", href: "/favicon.svg" }],
     },
+    pageTransition: { name: "page", mode: "out-in" },
   },
   imports: {
     dirs: ["stores"],

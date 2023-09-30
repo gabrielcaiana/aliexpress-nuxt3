@@ -7,7 +7,11 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint:js": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
+    "lint": "bun lint:js && yarn lint:prettier",
+    "lintfix": "prettier --write --list-different . && bun lint:js --fix"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
@@ -16,10 +20,17 @@
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
     "nuxt": "^3.7.1",
-    "prisma": "^5.2.0"
+    "prettier": "^3.0.3",
+    "prisma": "^5.2.0",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "@nuxtjs/supabase": "^1.1.0",

@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
+import { Product } from "~/types/product";
 
 interface State {
   isMenuOverlay: boolean;
   isLoading: boolean;
-  cart: unknown[];
+  cart: Product[];
   checkout: unknown[];
 }
 

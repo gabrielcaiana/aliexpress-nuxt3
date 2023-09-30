@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { useUserStore } from "~/stores/user";
+import { Product } from "~/types/product";
+
+const userStore = useUserStore();
+const route = useRoute();
+
 const currentImage = ref("");
 
 const images: Ref<string[]> = ref([
@@ -11,6 +17,20 @@ const images: Ref<string[]> = ref([
 ]);
 
 const priceComputed = computed(() => "26.40");
+
+const isInCart = computed(() => {
+  let res = false;
+
+  userStore.cart.forEach((prod: Product) => {
+    const id = Number(route.params.id);
+
+    if (id === prod.id) {
+      res = true;
+    }
+  });
+
+  return res;
+});
 
 const addToCart = () => {
   alert("Add to cart");

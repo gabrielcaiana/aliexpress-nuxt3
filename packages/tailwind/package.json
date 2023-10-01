@@ -1,0 +1,7 @@
+{
+  "name": "@nuxt3-aliexpress/tailwind",
+  "version": "1.0.0",
+  "description": "tailwind config for nuxt3-aliexpress",
+  "main": "index.ts",
+  "private": true
+}

@@ -30,6 +30,9 @@ importers:
 
   apps/ecom:
     dependencies:
+      '@nuxt3-aliexpress/tailwind':
+        specifier: workspace:*
+        version: link:../../packages/tailwind
       '@nuxtjs/supabase':
         specifier: ^1.1.0
         version: 1.1.0
@@ -91,6 +94,8 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
+
+  packages/tailwind: {}
 
 packages:
 

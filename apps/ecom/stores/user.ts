@@ -5,7 +5,7 @@ interface State {
   isMenuOverlay: boolean;
   isLoading: boolean;
   cart: Product[];
-  checkout: unknown[];
+  checkout: any[];
 }
 
 export const useUserStore = defineStore("user", {

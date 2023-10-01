@@ -12,6 +12,10 @@ module.exports = {
         success: {
           DEFAULT: "#009A66",
         },
+        orange: {
+          dark: "#FF3200",
+          DEFAULT: "#FE630C",
+        },
         warning: {
           darkest: "#FF851A",
           dark: "#FFAC2C",
@@ -30,6 +34,7 @@ module.exports = {
           200: "#f2f2f2",
           100: "#FAFAFA",
           50: "#F5F5F5",
+          10: "#FEEEEF",
         },
       },
     },

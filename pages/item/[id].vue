@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useUserStore } from "~/stores/user";
 import { Product } from "~/types/product";
 
 const userStore = useUserStore();

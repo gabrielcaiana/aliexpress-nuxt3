@@ -146,7 +146,7 @@ const isCartHover: Ref<boolean> = ref(false);
             </div>
           </div>
 
-          <NuxtLink to="/shoppingcart" class="flex items-center">
+          <NuxtLink to="/cart" class="flex items-center">
             <button
               class="relative md:block hidden"
               @mouseenter="isCartHover = true"

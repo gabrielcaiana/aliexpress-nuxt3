@@ -20,6 +20,7 @@ export default defineNuxtConfig({
       link: [{ rel: "icon", type: "image/x-svg", href: "/favicon.svg" }],
     },
     pageTransition: { name: "page", mode: "out-in" },
+    layoutTransition: { name: "layout", mode: "out-in" },
   },
   imports: {
     dirs: ["stores"],

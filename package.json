@@ -20,6 +20,11 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
-    "husky": "^8.0.3"
+    "@release-it/conventional-changelog": "^7.0.2",
+    "husky": "^8.0.3",
+    "release-it": "^16.2.1"
+  },
+  "engines": {
+    "node": ">=v18.16.0"
   }
 }

@@ -1,46 +1,25 @@
 {
-  "name": "nuxt-app",
+  "name": "nuxt3-aliexpress",
+  "version": "1.0.0",
+  "description": "aliexpress nuxt3 monorepo",
+  "author": "gabrielcaiana",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "prepare": "husky install",
-    "lint:js": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
-    "lint:prettier": "prettier --check .",
-    "lint": "bun lint:js && yarn lint:prettier",
-    "lintfix": "prettier --write --list-different . && bun lint:js --fix"
+    "build": "turbo run build",
+    "dev-ecom": "turbo run dev -- --ecom",
+    "prepare": "husky install"
   },
-  "prisma": {
-    "seed": "node prisma/seed.js"
+  "license": "ISC",
+  "dependencies": {
+    "turbo": "^1.10.14"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
+    "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
-    "@nuxt/devtools": "latest",
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@nuxtjs/tailwindcss": "^6.8.0",
-    "@typescript-eslint/parser": "^6.7.3",
-    "eslint": "^8.50.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "husky": "^8.0.3",
-    "nuxt": "^3.7.1",
-    "prettier": "^3.0.3",
-    "prisma": "^5.2.0",
-    "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "@nuxtjs/supabase": "^1.1.0",
-    "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
-    "@pinia/nuxt": "^0.4.11",
-    "@prisma/client": "^5.2.0",
-    "@stripe/stripe-js": "^2.1.2",
-    "nuxt-icon": "^0.5.0",
-    "nuxt-lodash": "^2.5.0",
-    "pinia": "^2.1.6",
-    "stripe": "^13.4.0"
+    "husky": "^8.0.3"
   }
 }

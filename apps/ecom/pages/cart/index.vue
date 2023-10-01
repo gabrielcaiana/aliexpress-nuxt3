@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useUserStore } from "~/stores/user";
 import { Product } from "~/types/product";
 
 const userStore = useUserStore();
@@ -71,7 +72,7 @@ onMounted(() => {
   <div id="cart-page" class="mt-4 max-w-[1200px] mx-auto px-2">
     <div v-if="false" class="h-[500px] flex items-center justify-center">
       <div class="pt-20">
-        <img class="mx-auto" width="250" src="/cart-empty.png" />
+        <img class="mx-auto" width="250" src="public/cart-empty.png" />
         <div class="text-xl text-center mt-4">No items yet?</div>
 
         <div v-if="true" class="flex text-center">

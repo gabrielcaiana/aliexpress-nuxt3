@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUserStore } from '~/stores/user';
+import { useUserStore } from "~/stores/user";
 
 const userStore = useUserStore();
 
@@ -97,7 +97,7 @@ const isCartHover: Ref<boolean> = ref(false);
           class="flex lg:justify-start justify-between gap-10 max-w-[1150px] w-full px-3 py-5 mx-auto"
         >
           <NuxtLink to="/" class="min-w-[170px]">
-            <img width="170" src="/aliExpress-logo.png" />
+            <img width="170" src="public/aliExpress-logo.png" />
           </NuxtLink>
           <div class="max-w-[700px] w-full md:block hidden">
             <div class="relative">

@@ -5,7 +5,9 @@
       "dependsOn": ["^build"],
       "outputs": [
         "dist/**",
-        ".output/**"
+        ".output/**",
+        ".histoire/**",
+        "**/.vitepress/dist/**"
       ]
     },
     "lint": {
@@ -15,11 +17,10 @@
       "outputs": []
     },
     "dev": {
-      "cache": false,
-      "persistent": true
+      "cache": false
     },
     "test": {
       "outputs": []
     }
   }
-  }
+}

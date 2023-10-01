@@ -13,7 +13,7 @@
     "lintfix": "prettier --write --list-different . && pnpm lint:js --fix"
   },
   "prisma": {
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.mjs"
   },
   "dependencies": {
     "@nuxt3-aliexpress/tailwind": "workspace:*",

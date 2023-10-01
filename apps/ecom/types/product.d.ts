@@ -6,6 +6,6 @@ export interface Product {
   description: string;
   url: string;
   price: number;
-  created_at: Date;
-  orderItems: OrderItem[];
+  created_at: Date | string;
+  orderItems?: OrderItem[];
 }

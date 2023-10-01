@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-aliexpress",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "aliexpress nuxt3 monorepo",
   "author": "gabrielcaiana",
   "private": true,
@@ -11,7 +11,11 @@
   "scripts": {
     "build": "turbo run build",
     "dev-ecom": "turbo run dev -- --ecom",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "release-it"
+  },
+  "release-it": {
+    "git": false
   },
   "license": "ISC",
   "dependencies": {

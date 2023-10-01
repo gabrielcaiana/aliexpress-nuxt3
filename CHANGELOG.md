@@ -1,5 +1,7 @@
 
 
+## [1.1.1](https://github.com/gabrielcaiana/aliexpress-nuxt3/compare/1.1.0...1.1.1) (2023-10-01)
+
 ## 1.1.0 (2023-10-01)
 
 

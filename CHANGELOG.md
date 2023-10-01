@@ -1,5 +1,12 @@
 
 
+## [1.2.0](https://github.com/gabrielcaiana/aliexpress-nuxt3/compare/1.1.1...1.2.0) (2023-10-01)
+
+
+### Features
+
+* create tailwind package ([e62cfb3](https://github.com/gabrielcaiana/aliexpress-nuxt3/commit/e62cfb39d448a11f9366ad671473676c67ffe089))
+
 ## [1.1.1](https://github.com/gabrielcaiana/aliexpress-nuxt3/compare/1.1.0...1.1.1) (2023-10-01)
 
 ## 1.1.0 (2023-10-01)

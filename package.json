@@ -14,9 +14,6 @@
     "prepare": "husky install",
     "release": "release-it"
   },
-  "release-it": {
-    "git": false
-  },
   "license": "ISC",
   "dependencies": {
     "turbo": "^1.10.14"
@@ -30,5 +27,22 @@
   },
   "engines": {
     "node": ">=v18.16.0"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "conventionalcommits",
+        "infile": "CHANGELOG.md"
+      }
+    }
   }
 }

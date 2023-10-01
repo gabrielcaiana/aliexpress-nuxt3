@@ -2,6 +2,18 @@
   <div class="fixed overflow-auto z-[-1] bg-neutral-200 w-full h-[100vh]">
     <NuxtLayout>
       <NuxtPage />
+      <UiMenuOverlay
+        :class="[
+          {
+            'max-h-[100vh] transition-all duration-200 ease-in visible':
+              userStore.isMenuOverlay,
+          },
+          {
+            'max-h-0 transition-all duration-200 ease-out invisible':
+              !userStore.isMenuOverlay,
+          },
+        ]"
+      />
     </NuxtLayout>
   </div>
 </template>
@@ -10,6 +22,34 @@
 useHead({
   title: "AliExpress",
 });
+
+const userStore = useUserStore();
+const route = useRoute();
+
+const windowWidth = ref(process.client ? window.innerWidth : 0);
+
+onMounted(() => {
+  userStore.isLoading = false;
+  window.addEventListener("resize", function () {
+    windowWidth.value = window.innerWidth;
+  });
+});
+
+watch(
+  () => windowWidth.value,
+  () => {
+    if (windowWidth.value >= 767) {
+      userStore.isMenuOverlay = false;
+    }
+  },
+);
+
+watch(
+  () => route.fullPath,
+  () => {
+    userStore.isLoading = true;
+  },
+);
 </script>
 
 <style>

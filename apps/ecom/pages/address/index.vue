@@ -6,19 +6,67 @@ interface Error {
   message: string;
 }
 
-const contactName = ref(null);
-const address = ref(null);
-const zipCode = ref(null);
-const city = ref(null);
-const country = ref(null);
+interface Model {
+  contactName: string;
+  address: string;
+  zipCode: string;
+  city: string;
+  country: string;
+}
 
-const currentAddress = ref(null);
-const isUpdate = ref(false);
-const isWorking = ref(false);
+const model = reactive<Model>({
+  contactName: "",
+  address: "",
+  zipCode: "",
+  city: "",
+  country: "",
+});
+
+// const currentAddress: Ref<string | null> = ref(null);
+// const isUpdate: Ref<boolean> = ref(false);
+const isWorking: Ref<boolean> = ref(false);
 const error: Ref<Error | null> = ref(null);
 
+watchEffect(() => {
+  userStore.isLoading = false;
+});
+
 const submit = () => {
-  alert("submit");
+  isWorking.value = true;
+  error.value = null;
+
+  if (!model.contactName) {
+    error.value = {
+      type: "contactName",
+      message: "Contact name is required",
+    };
+  } else if (!model.address) {
+    error.value = {
+      type: "address",
+      message: "Address is required",
+    };
+  } else if (!model.zipCode) {
+    error.value = {
+      type: "zipCode",
+      message: "Zip code is required",
+    };
+  } else if (!model.city) {
+    error.value = {
+      type: "city",
+      message: "City is required",
+    };
+  } else if (!model.country) {
+    error.value = {
+      type: "country",
+      message: "Country is required",
+    };
+  }
+
+  if (error.value) {
+    isWorking.value = false;
+  }
+
+  // More here
 };
 </script>
 
@@ -29,7 +77,7 @@ const submit = () => {
         <div class="text-xl text-bold mb-2">Address Details</div>
         <form @submit.prevent="submit()">
           <BaseTextInput
-            v-model:input="contactName"
+            v-model="model.contactName"
             class="w-full"
             placeholder="Contact Name"
             input-type="text"
@@ -37,7 +85,7 @@ const submit = () => {
           />
 
           <BaseTextInput
-            v-model:input="address"
+            v-model="model.address"
             class="w-full mt-2"
             placeholder="Address"
             input-type="text"
@@ -45,7 +93,7 @@ const submit = () => {
           />
 
           <BaseTextInput
-            v-model:input="zipCode"
+            v-model="model.zipCode"
             class="w-full mt-2"
             placeholder="Zip Code"
             input-type="text"
@@ -53,7 +101,7 @@ const submit = () => {
           />
 
           <BaseTextInput
-            v-model:input="city"
+            v-model="model.city"
             class="w-full mt-2"
             placeholder="City"
             input-type="text"
@@ -61,7 +109,7 @@ const submit = () => {
           />
 
           <BaseTextInput
-            v-model:input="country"
+            v-model="model.country"
             class="w-full mt-2"
             placeholder="Country"
             input-type="text"

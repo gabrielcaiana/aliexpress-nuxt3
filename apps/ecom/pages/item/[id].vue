@@ -49,6 +49,10 @@ watchEffect(() => {
     userStore.isLoading = false;
   }
 });
+
+useHead({
+  title: product.value?.title,
+});
 </script>
 
 <template>

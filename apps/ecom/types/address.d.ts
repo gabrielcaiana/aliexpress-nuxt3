@@ -6,5 +6,5 @@ export interface Address {
   zipcode: string;
   city: string;
   country: string;
-  created_at: Date;
+  created_at: Date | string;
 }

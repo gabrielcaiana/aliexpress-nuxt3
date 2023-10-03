@@ -66,6 +66,10 @@ const goToCheckout = () => {
 onMounted(() => {
   setTimeout(() => (userStore.isLoading = false), 200);
 });
+
+useHead({
+  title: "Cart",
+});
 </script>
 
 <template>

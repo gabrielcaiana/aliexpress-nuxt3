@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { Address } from "~/types/address";
+
 const userStore = useUserStore();
+const user = useSupabaseUser();
 
 interface Error {
   type: string;
@@ -22,16 +25,31 @@ const model = reactive<Model>({
   country: "",
 });
 
-// const currentAddress: Ref<string | null> = ref(null);
-// const isUpdate: Ref<boolean> = ref(false);
+const currentAddress: Ref<Address | null> = ref(null);
+const isUpdate: Ref<boolean> = ref(false);
 const isWorking: Ref<boolean> = ref(false);
 const error: Ref<Error | null> = ref(null);
 
-watchEffect(() => {
+watchEffect(async () => {
+  const { data } = await useFetch(
+    `/api/prisma/get-address-by-user/${user.value?.id}`,
+  );
+
+  if (data.value) {
+    currentAddress.value = data.value;
+    model.contactName = currentAddress.value.name;
+    model.address = currentAddress.value.address;
+    model.zipCode = currentAddress.value.zipcode;
+    model.city = currentAddress.value.city;
+    model.country = currentAddress.value.country;
+
+    isUpdate.value = true;
+  }
+
   userStore.isLoading = false;
 });
 
-const submit = () => {
+const submit = async () => {
   isWorking.value = true;
   error.value = null;
 
@@ -66,8 +84,34 @@ const submit = () => {
     isWorking.value = false;
   }
 
-  // More here
+  if (isUpdate.value) {
+    await useFetch(`/api/prisma/update-address/${currentAddress.value?.id}`, {
+      method: "PATCH",
+      body: {
+        userId: user.value?.id,
+        ...model,
+      },
+    });
+
+    isWorking.value = false;
+    return navigateTo("/checkout");
+  }
+
+  await useFetch("/api/prisma/create-address", {
+    method: "POST",
+    body: {
+      userId: user.value?.id,
+      ...model,
+    },
+  });
+
+  isWorking.value = false;
+  return navigateTo("/checkout");
 };
+
+useHead({
+  title: "Address",
+});
 </script>
 
 <template>

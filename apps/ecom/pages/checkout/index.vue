@@ -1,16 +1,41 @@
 <script setup lang="ts">
-import { Product } from "~/types/product";
+import { Address } from "~/types/address";
 
-const stripe = null;
-const elements = null;
-const card = null;
-const form = null;
-const total = ref(0);
-const clientSecret = null;
-const currentAddress = ref(null);
-const isProcessing = ref(false);
+// const stripe = null;
+// const elements = null;
+// const card = null;
+// const form = null;
+const total: Ref<string | number> = ref("");
+// const clientSecret = null;
+const currentAddress: Ref<Address | null> = ref(null);
+const isProcessing: Ref<boolean> = ref(false);
 
 const userStore = useUserStore();
+const user = useSupabaseUser();
+const route = useRoute();
+
+onBeforeMount(async () => {
+  // if (userStore.checkout.length < 1) {
+  //   return navigateTo("/cart");
+  // }
+
+  total.value = "0.00";
+
+  if (user.value) {
+    const { data } = await useFetch(
+      `/api/prisma/get-address-by-user/${user.value.id}}`,
+    );
+
+    currentAddress.value = data.value;
+    setTimeout(() => (userStore.isLoading = false), 200);
+  }
+});
+
+watchEffect(() => {
+  if (route.fullPath === "/checkout" && !user.value) {
+    return navigateTo("/auth");
+  }
+});
 
 onMounted(() => {
   isProcessing.value = true;
@@ -20,7 +45,7 @@ onMounted(() => {
 watch(
   () => total.value,
   () => {
-    if (total.value > 0) {
+    if (Number(total.value) > 0) {
       stripeInit();
     }
   },
@@ -30,26 +55,12 @@ const stripeInit = async () => {};
 
 const pay = async () => {};
 
-const createOrder = async (stripeId: string) => {};
+// const createOrder = async (stripeId: string) => {};
+// const showError = async (errorMsgText: string) => {};
 
-const showError = async (errorMsgText: string) => {};
-
-const products: Ref<Product[]> = ref([
-  {
-    id: 1,
-    title: "Product 1",
-    description: "Product 1 description",
-    url: "https://picsum.photos/id/237/200/300",
-    price: 999,
-  },
-  {
-    id: 2,
-    title: "Product 2",
-    description: "Product 1 description",
-    url: "https://picsum.photos/id/238/200/300",
-    price: 999,
-  },
-]);
+useHead({
+  title: "Checkout",
+});
 </script>
 
 <template>
@@ -58,7 +69,7 @@ const products: Ref<Product[]> = ref([
       <div class="md:w-[65%]">
         <div class="bg-white rounded-lg p-4">
           <div class="text-xl font-semibold mb-2">Shipping Address</div>
-          <div v-if="false">
+          <div v-if="currentAddress">
             <NuxtLink
               to="/address"
               class="flex items-center pb-2 text-blue-500 hover:text-red-400"
@@ -72,23 +83,23 @@ const products: Ref<Product[]> = ref([
               <ul class="text-xs">
                 <li class="flex items-center gap-2">
                   <div>Contact name:</div>
-                  <div class="font-bold">Test</div>
+                  <div class="font-bold">{{ currentAddress.name }}</div>
                 </li>
                 <li class="flex items-center gap-2">
                   <div>Address:</div>
-                  <div class="font-bold">Test</div>
+                  <div class="font-bold">{{ currentAddress.address }}</div>
                 </li>
                 <li class="flex items-center gap-2">
                   <div>Zip Code:</div>
-                  <div class="font-bold">Test</div>
+                  <div class="font-bold">{{ currentAddress.zipcode }}</div>
                 </li>
                 <li class="flex items-center gap-2">
                   <div>City:</div>
-                  <div class="font-bold">Test</div>
+                  <div class="font-bold">{{ currentAddress.city }}</div>
                 </li>
                 <li class="flex items-center gap-2">
                   <div>Country:</div>
-                  <div class="font-bold">Test</div>
+                  <div class="font-bold">{{ currentAddress.country }}</div>
                 </li>
               </ul>
             </div>
@@ -105,7 +116,7 @@ const products: Ref<Product[]> = ref([
         </div>
 
         <div id="items" class="bg-white rounded-lg p-4 mt-4">
-          <div v-for="product in products" :key="product.id">
+          <div v-for="product in userStore.checkout" :key="product.id">
             <UiCheckoutItem :product="product" />
           </div>
         </div>
@@ -125,7 +136,7 @@ const products: Ref<Product[]> = ref([
           <div class="flex items-center justify-between my-4">
             <div class="font-semibold">Total</div>
             <div class="text-2xl font-semibold">
-              $ <span class="font-extrabold">{{ total / 100 }}</span>
+              $ <span class="font-extrabold">{{ Number(total) / 100 }}</span>
             </div>
           </div>
 

@@ -1,28 +1,38 @@
 <script setup lang="ts">
+import type { Provider } from "@supabase/supabase-js";
+
 definePageMeta({
   layout: "blank",
 });
 
-// const client = useSupabaseClient();
-// const user = useSupabaseUser();
+const client = useSupabaseClient();
+const user = useSupabaseUser();
 
-// watchEffect(() => {
-//   if (user.value) {
-//     return navigateTo("/");
-//   }
-// });
+watchEffect(() => {
+  if (user.value) {
+    return navigateTo("/");
+  }
+});
 
-const login = (provider: string) => {
-  alert(provider);
-  // const { data, error } = await client.auth.signInWithOAuth({
-  //   provider,
-  //   redirectTo: window.location.origin,
-  // });
+const login = async (provider: Provider) => {
+  const { error } = await client.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: window.location.origin,
+    },
+  });
+
+  if (error) {
+    throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
+  }
 };
 </script>
 
 <template>
   <div id="auth-page" class="w-full h-[100vh] bg-white">
+    <pre>
+      {{ user }}
+    </pre>
     <div
       class="w-full flex items-center justify-center p-5 border-b border-b-gray-300"
     >
